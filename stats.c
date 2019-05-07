@@ -80,11 +80,16 @@ unsigned char find_minimum(unsigned char array[], unsigned int size) {
 	sort_array(array,size);
 	return(array[size-1]);
 }
-int cmpr(const void *a, const void *b){
-	unsigned char x = *(unsigned char*)a;
-	unsigned char y = *(unsigned char*)b;
-	return ((x<y) - (x>y));
-}
-void sort_array(unsigned char array[],unsigned int size) {
-	qsort (array, size,sizeof(unsigned char*),cmpr);
+void sort_array(unsigned char a[],unsigned int len) {
+	//Implement Bubble sort
+	int i = 0, j = 0, tmp;
+	for (i = 0; i < len; i++) {
+	     for (j = 0; j < len - i - 1; j++) {
+	         if (a[j] < a[j + 1]) { 
+	             tmp = a[j];
+	             a[j] = a[j + 1];
+	             a[j + 1] = tmp;
+	          }
+	     }
+	}
 }
