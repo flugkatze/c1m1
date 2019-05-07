@@ -37,21 +37,54 @@ void main() {
 
   /* Other Variable Declarations Go Here */
   /* Statistics and Printing Functions Go Here */
+  print_statistics(test, SIZE);
+  print_array(test, SIZE);
 
 }
 
 /* Add other Implementation File Code Here */
-void print_statistics(unsigned char *array,unsigned int size) {
+void print_statistics(unsigned char array[],unsigned int size) {
+	unsigned char median = find_median(array,size);
+	unsigned char mean = find_mean(array,size);
+	unsigned char maximum = find_maximum(array,size);
+	unsigned char minimum = find_minimum(array,size);
+	printf("The median is: %d\n",median);
+	printf("The mean is: %d\n",mean);
+	printf("The maximum is: %d\n",maximum);
+	printf("The minimum is: %d\n",minimum);
 }
-void print_array(unsigned char *array,unsigned int size) {
+void print_array(unsigned char array[],unsigned int size) {
+	int i;
+	for(i = 0; i < size; i++){
+		printf("%d\n",array[i]);
+	}
 }
-unsigned char find_median(unsigned char *array, unsigned int size) {
+unsigned char find_median(unsigned char array[], unsigned int size) {
+	sort_array(array,size);
+	return(array[size/2]);
 }
-unsigned char find_mean(unsigned char *array, unsigned int size) {
+unsigned char find_mean(unsigned char array[], unsigned int size) {
+	int i;
+	unsigned int sum = 0;
+
+	for (i = 0; i < size; i++){
+		sum += array[i];
+	}
+	return(sum/size);
 }
-unsigned char find_maximum(unsigned char *array, unsigned int size) {
+unsigned char find_maximum(unsigned char array[], unsigned int size) {
+	sort_array(array,size);
+	return(array[0]);
 }
-unsigned char find_minimum(unsigned char *array, unsigned int size) {
+unsigned char find_minimum(unsigned char array[], unsigned int size) {
+	sort_array(array,size);
+	return(array[size-1]);
 }
-void sort_array(unsigned char *array,unsigned int size) {
+int cmpr(const void *a, const void *b){
+	unsigned char x = *(unsigned char*)a;
+	unsigned char y = *(unsigned char*)b;
+	return ((x<y) - (x>y));
+}
+void sort_array(unsigned char array[],unsigned int size) {
+	qsort (array, size,sizeof(unsigned char*),cmpr);
 }
