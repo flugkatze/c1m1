@@ -38,7 +38,7 @@ FLAGS = -Wall \
 	-O0 \
 	-std=c99 \
 	-DCOURSE1
-TARGET = c1m2
+TARGET = Course1
 
 ifeq ($(PLATFORM), HOST)
 	CC = gcc
